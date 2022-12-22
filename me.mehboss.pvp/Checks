@@ -5,7 +5,6 @@ import java.util.logging.Level;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
@@ -79,28 +78,32 @@ public class Checks {
 	}
 
 	public void updateSigns() {
+
 		if (!plugin.signloc.isEmpty()) {
 			for (Location loc : plugin.signloc) {
 
+				plugin.getLogger().log(Level.SEVERE, loc.toString());
+				plugin.getLogger().log(Level.SEVERE, String.valueOf(plugin.signloc.size()));
+				
 				if (loc.getBlock() == null || loc.getBlock().getType() == null) {
-					plugin.getLogger().log(Level.SEVERE, "DID NOT UPDATE");
-					return;
+					continue;
 				}
-				if (loc.getBlock().getType() != Material.WALL_SIGN && loc.getBlock().getType() != Material.SIGN_POST)
-					return;
+				if (!plugin.signMatch(loc.getBlock())) {
+					continue;
+				}
 
 				Sign sign = (Sign) loc.getBlock().getState();
 
-				if (!sign.isPlaced() || sign == null)
-					plugin.signloc.remove(loc);
+				if (!sign.isPlaced() || sign == null) {
+					continue;
+				}
 
 				if (!sign.getLine(1).isEmpty() && plugin.arenas.containsKey(sign.getLine(1))) {
+					plugin.getLogger().log(Level.SEVERE, loc.toString());
 					Arena arena = plugin.arenas.get(sign.getLine(1));
 					sign.setLine(3, "Status: " + arena.getState().toString());
 					sign.setLine(2, "Queue: " + String.valueOf(arena.getQueue().size()));
 					sign.update();
-
-					plugin.getLogger().log(Level.SEVERE, "UPDATED!");
 				}
 			}
 		}
