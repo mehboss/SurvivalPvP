@@ -9,6 +9,9 @@ import net.md_5.bungee.api.chat.TextComponent;
 
 public class Countdown extends BukkitRunnable {
 
+	private int seconds;
+	private Player winner;
+	
 	public Countdown(int seconds, Player p) {
 		this.seconds = seconds;
 		this.winner = p;
@@ -17,9 +20,6 @@ public class Countdown extends BukkitRunnable {
 	public void start() {
 		this.runTaskTimer(Bukkit.getPluginManager().getPlugin("SurvivalPvP"), 0, 20);
 	}
-
-	private int seconds;
-	private Player winner;
 
 	@Override
 	public void run() {
