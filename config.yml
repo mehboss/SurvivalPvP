@@ -6,10 +6,10 @@
 #
 # Permissions: s1v1.admin / s1v1.leave
 # Hunger on/off
-Hunger: 'true'
+Hunger: true
 #
 # Amount of seconds to pickup items
-Pickup-Seconds: '10'
+Pickup-Seconds: 10
 #
 Game-Start: '&c[PvP] &fThe game has &a&lBEGUN.&f Your opponent is&c %opponent%. &fLast one alive wins!'
 Spawnpoint-1: '&c[PvP] &fSuccessfully set spawnpoint 1 for arena&c %arena%'
