@@ -1,0 +1,19 @@
+name: SurvivalPvP
+version: 1.0
+api-version: 1.18
+main: me.mehboss.pvp.Main
+author: mehboss
+description: A custom SurvivalPvP plugin.
+commands:
+  s1v1:
+    description: Main command for this plugin
+    aliases: [arena]
+    permissions:
+      spvp.*:
+        default: op
+      survivalpvp.*:
+        default: op
+      s1v1*:
+        default: op
+      s1v1.leave:
+        default: true
