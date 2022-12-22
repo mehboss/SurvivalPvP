@@ -26,8 +26,10 @@ public class Checks {
 			found = true;
 		}
 
-		if (arena != null && arena.getQueue().size() >= 2)
+		if (arena != null && arena.getQueue().size() >= 2) {
 			sendMessage(p, "Arena-Full");
+			return;
+		}
 
 		if (arena == null) {
 			for (Arena name : plugin.arenas.values()) {
@@ -79,32 +81,31 @@ public class Checks {
 
 	public void updateSigns() {
 
-		if (!plugin.signloc.isEmpty()) {
-			for (Location loc : plugin.signloc) {
+		if (plugin.signloc.isEmpty()) {
+			return;
+		}
+		
+		for (Location loc : plugin.signloc) {
 
+			plugin.getLogger().log(Level.SEVERE, loc.toString());
+			plugin.getLogger().log(Level.SEVERE, String.valueOf(plugin.signloc.size()));
+
+			if (loc.getBlock() == null || loc.getBlock().getType() == null || !plugin.signMatch(loc.getBlock())) {
+				continue;
+			}
+
+			Sign sign = (Sign) loc.getBlock().getState();
+
+			if (!sign.isPlaced() || sign == null) {
+				continue;
+			}
+
+			if (!sign.getLine(1).isEmpty() && plugin.arenas.containsKey(sign.getLine(1))) {
 				plugin.getLogger().log(Level.SEVERE, loc.toString());
-				plugin.getLogger().log(Level.SEVERE, String.valueOf(plugin.signloc.size()));
-				
-				if (loc.getBlock() == null || loc.getBlock().getType() == null) {
-					continue;
-				}
-				if (!plugin.signMatch(loc.getBlock())) {
-					continue;
-				}
-
-				Sign sign = (Sign) loc.getBlock().getState();
-
-				if (!sign.isPlaced() || sign == null) {
-					continue;
-				}
-
-				if (!sign.getLine(1).isEmpty() && plugin.arenas.containsKey(sign.getLine(1))) {
-					plugin.getLogger().log(Level.SEVERE, loc.toString());
-					Arena arena = plugin.arenas.get(sign.getLine(1));
-					sign.setLine(3, "Status: " + arena.getState().toString());
-					sign.setLine(2, "Queue: " + String.valueOf(arena.getQueue().size()));
-					sign.update();
-				}
+				Arena arena = plugin.arenas.get(sign.getLine(1));
+				sign.setLine(3, "Status: " + arena.getState().toString());
+				sign.setLine(2, "Queue: " + String.valueOf(arena.getQueue().size()));
+				sign.update();
 			}
 		}
 	}
