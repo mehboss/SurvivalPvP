@@ -36,7 +36,7 @@ Timed-Pickup: '&c[PvP] &fYou have &cten seconds&f to pickup the loot before it d
 Player-Left: '&c[PvP] &fYour opponent left the queue. You have been put back in the queue.'
 Could-Not-Start: '&c[PvP] &fCould not start game. Both spawn locations have not been set for this arena &c(%arena%). &fPlease contact staff.'
 No-Available-Arenas: '&c[PvP] &fAll arenas are full. Please try again later or contact staff to create more arenas.'
-No-Perms: '&c[PvP] &fYou are lacking the permission &c[s1v1.admin][s1v1.leave]'
+No-Perms: '&c[PvP] &fYou are lacking the permission &c[s1v1.queue/leave/admin]'
 #
 # Add multiple end commands
 End-Commands:
