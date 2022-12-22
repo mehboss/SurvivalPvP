@@ -4,7 +4,7 @@
 # Made to work with 1.19
 #
 #
-# Permissions: s1v1.admin / s1v1.leave
+# Permissions: s1v1.admin / s1v1.leave / s1v1.queue
 # Hunger on/off
 Hunger: true
 #
@@ -47,3 +47,4 @@ Invalid-Args:
   - '&7/s1v1 arena setspawn1/setspawn2 [name]'
   - '&7/s1v1 leave'
   - '&7/s1v1 list'
+  - '&7/s1v1 queue'
