@@ -56,9 +56,6 @@ public class Checks {
 			arena.addQueue(p);
 
 			if (arena.getQueue().size() == 2) {
-				p.sendMessage(
-						ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Joined-Full-Queue"))
-								.replaceAll("%arena%", arena.getName()));
 				arena.setState(ArenaState.STARTING);
 				updateSigns();
 
@@ -132,7 +129,8 @@ public class Checks {
 
 		updateSigns();
 
-		new Countdown(plugin.getConfig().getInt("Pickup-Seconds"), winner).start();
+		Countdown countdown = new Countdown(plugin.getConfig().getInt("Pickup-Seconds"), winner);
+		countdown.start();
 
 		Bukkit.getScheduler().runTaskLater(Bukkit.getPluginManager().getPlugin("SurvivalPvP"), new Runnable() {
 			@Override
@@ -180,6 +178,13 @@ public class Checks {
 		Player player1 = arena.getQueue().get(0);
 		Player player2 = arena.getQueue().get(1);
 
+		player1.sendMessage(
+				ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Joined-Full-Queue"))
+						.replaceAll("%arena%", arena.getName()));
+		player2.sendMessage(
+				ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("Joined-Full-Queue"))
+						.replaceAll("%arena%", arena.getName()));
+		
 		Bukkit.getScheduler().runTaskLater(Bukkit.getPluginManager().getPlugin("SurvivalPvP"), new Runnable() {
 			@Override
 			public void run() {
