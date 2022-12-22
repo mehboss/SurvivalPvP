@@ -21,7 +21,7 @@ No-Arena: '&c[PvP] &fArena not found. Please double check spelling and make sure
 No-Arenas: '&c[PvP] &fYou must first create an arena using &c/s1v1 arena create [name]'
 Arena-Full: '&c[PvP] &fSpecified arena full. Searching elsewhere..'
 Already-In-Queue: '&c[PvP] &fYou are already in the queue for arena&c %arena%. &fType &e/s1v1 leave &fto cancel.'
-Joined-Full-Queue: '&c[PvP] &fYou joined a full arena queue. The game will start in 5 seconds. &c(%arena%).'
+Joined-Full-Queue: '&c[PvP] &fThe queue is now full. The game will start in 5 seconds. &c(%arena%).'
 Added-To-Queue: '&c[PvP] &fYou have been added to the queue for&c %arena%. &fWaiting for one more player.'
 Not-In-Queue: '&c[PvP] &fYou are not currently in a queue.'
 Left-Queue: '&c[PvP] &fYou have successfully left the queue for arena&c %arena%.'
