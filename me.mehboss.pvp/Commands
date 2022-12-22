@@ -65,6 +65,10 @@ public class Commands implements CommandExecutor {
 				return false;
 			}
 
+			p.sendMessage(ChatColor.DARK_GRAY + "----------------------------");
+			p.sendMessage(ChatColor.RED + "  ARENA LIST");
+			p.sendMessage(" ");
+			
 			for (Arena arena : main.arenas.values()) {
 
 				ChatColor color = ChatColor.GREEN;
@@ -76,9 +80,10 @@ public class Commands implements CommandExecutor {
 				if (arena.getState() == ArenaState.RUNNING)
 					color = ChatColor.DARK_RED;
 
-				p.sendMessage(arena.getName() + ChatColor.DARK_GRAY + " [" + ChatColor.YELLOW + "STATUS: " + color
+				p.sendMessage(ChatColor.GRAY + arena.getName() + ChatColor.DARK_GRAY + " [" + ChatColor.YELLOW + "STATUS: " + color
 						+ arena.getState().toString() + ChatColor.DARK_GRAY + "]");
 			}
+			p.sendMessage(ChatColor.DARK_GRAY + "----------------------------");
 			return true;
 		}
 
@@ -94,6 +99,9 @@ public class Commands implements CommandExecutor {
 				return false;
 			}
 
+			p.sendMessage(ChatColor.DARK_GRAY + "----------------------------");
+			p.sendMessage(ChatColor.RED + "  ARENA QUEUE");
+			p.sendMessage(" ");
 			for (Arena arena : main.arenas.values()) {
 				ChatColor color = ChatColor.GREEN;
 
@@ -115,11 +123,14 @@ public class Commands implements CommandExecutor {
 				if (arena.getState() == ArenaState.RUNNING)
 					color = ChatColor.DARK_RED;
 
-				p.sendMessage(arena.getName() + ChatColor.DARK_GRAY + " [" + ChatColor.YELLOW + "STATUS: " + color
-						+ arena.getState().toString() + ChatColor.DARK_GRAY + "] [" + ChatColor.RED + player1
-						+ ChatColor.WHITE + ", " + ChatColor.RED + player2 + ChatColor.DARK_GRAY + "]");
+				p.sendMessage("    " + ChatColor.GRAY + arena.getName().toUpperCase());
+				p.sendMessage(ChatColor.DARK_GRAY + " [" + ChatColor.YELLOW + "STATUS: " + color
+						+ arena.getState().toString() + ChatColor.DARK_GRAY + "]");
+				p.sendMessage(ChatColor.DARK_GRAY + " [" + ChatColor.RED + "QUEUE: " + ChatColor.GRAY + player1.toUpperCase()
+						+ ChatColor.WHITE + ", " + ChatColor.GRAY + player2.toUpperCase() + ChatColor.DARK_GRAY + "]");
 				p.sendMessage(" ");
 			}
+			p.sendMessage(ChatColor.DARK_GRAY + "----------------------------");
 			return true;
 		}
 
