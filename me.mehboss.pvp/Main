@@ -11,7 +11,7 @@ import java.util.logging.Level;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -30,7 +30,7 @@ public class Main extends JavaPlugin {
 
 	File signsYml = new File(getDataFolder() + "/signs.yml");
 	FileConfiguration signsConfig = null;
-	
+
 	File arenasYml = new File(getDataFolder() + "/arenas.yml");
 	FileConfiguration arenasConfig = null;
 
@@ -70,7 +70,7 @@ public class Main extends JavaPlugin {
 		getLogger().log(Level.INFO, " ");
 		getLogger().log(Level.INFO, "Made by MehBoss on SpigotMC!");
 		getLogger().log(Level.INFO, "---------------------------");
-		
+
 		saveDefaultConfig();
 		reloadConfig();
 
@@ -103,14 +103,14 @@ public class Main extends JavaPlugin {
 
 	@Override
 	public void onDisable() {
-		
+
 		getLogger().log(Level.INFO, "---------------------------");
 		getLogger().log(Level.INFO, "Saving arenas..");
 		getLogger().log(Level.INFO, "Saving playerdata..");
 		getLogger().log(Level.INFO, "Saving signdata..");
 		getLogger().log(Level.INFO, "FINISHED!");
 		getLogger().log(Level.INFO, "---------------------------");
-		
+
 		if (!quit.isEmpty()) {
 			List<String> list = new ArrayList<>();
 
@@ -120,30 +120,50 @@ public class Main extends JavaPlugin {
 			dataConfig.set("Players", list);
 		}
 
+		ArrayList<Location> newsign = new ArrayList<>();
+
 		if (!signloc.isEmpty()) {
 			signsConfig.set("Signs", signloc);
+
 			for (Location loc : signloc) {
-				if (loc == null || loc.getBlock() == null) {
-					getLogger().log(Level.SEVERE, "NOOOOO");
-					return;
+				if (loc == null || loc.getBlock() == null || !signMatch(loc.getBlock())) {
+					continue;
 				}
 
-				if (loc.getBlock().getType() == Material.SIGN_POST || loc.getBlock().getType() == Material.WALL_SIGN) {
-					
-					Sign sign = (Sign) loc.getBlock().getState(); 
-					
-					sign.setLine(2, "Queue: 0");
-					sign.setLine(3, "Status: EMPTY");
-					sign.update();
-					getLogger().log(Level.SEVERE, "YESSSS");
-				}
+				newsign.add(loc);
+				Sign sign = (Sign) loc.getBlock().getState();
+
+				sign.setLine(2, "Queue: 0");
+				sign.setLine(3, "Status: EMPTY");
+				sign.update();
 			}
 		}
-		getLogger().log(Level.SEVERE, "SAVING..");
+		
+		signsConfig.set("Signs", newsign);
 		saveCustomYml(dataConfig, dataYml);
 		saveCustomYml(signsConfig, signsYml);
 		saveCustomYml(arenasConfig, arenasYml);
 		initCustomYml();
+	}
+
+	public boolean signMatch(Block b) {
+		if (b.getType() == XMaterial.matchXMaterial("OAK_SIGN").get().parseMaterial()
+				|| b.getType() == XMaterial.matchXMaterial("SPRUCE_SIGN").get().parseMaterial()
+				|| b.getType() == XMaterial.matchXMaterial("BIRCH_SIGN").get().parseMaterial()
+				|| b.getType() == XMaterial.matchXMaterial("JUNGLE_SIGN").get().parseMaterial()
+				|| b.getType() == XMaterial.matchXMaterial("ACACIA_SIGN").get().parseMaterial()
+				|| b.getType() == XMaterial.matchXMaterial("DARK_OAK_SIGN").get().parseMaterial()
+				|| b.getType() == XMaterial.matchXMaterial("MANGROVE_SIGN").get().parseMaterial()
+				|| b.getType() == XMaterial.matchXMaterial("OAK_WALL_SIGN").get().parseMaterial()
+				|| b.getType() == XMaterial.matchXMaterial("SPRUCE_WALL_SIGN").get().parseMaterial()
+				|| b.getType() == XMaterial.matchXMaterial("BIRCH_WALL_SIGN").get().parseMaterial()
+				|| b.getType() == XMaterial.matchXMaterial("JUNGLE_WALL_SIGN").get().parseMaterial()
+				|| b.getType() == XMaterial.matchXMaterial("ACACIA_WALL_SIGN").get().parseMaterial()
+				|| b.getType() == XMaterial.matchXMaterial("DARK_OAK_WALL_SIGN").get().parseMaterial()
+				|| b.getType() == XMaterial.matchXMaterial("MANGROVE_WALL_SIGN").get().parseMaterial())
+			return true;
+
+		return false;
 	}
 
 	public void loadLobbies() {
