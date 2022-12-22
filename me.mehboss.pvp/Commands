@@ -36,12 +36,12 @@ public class Commands implements CommandExecutor {
 		}
 
 		if (args[0].equalsIgnoreCase("leave")) {
-			
+
 			if (!p.hasPermission("s1v1.leave")) {
 				plugin.sendMessage(p, "No-Perms");
 				return false;
 			}
-			
+
 			if (!main.playing.containsKey(p) || main.arenas.get(main.playing.get(p)).getState() == ArenaState.RUNNING) {
 				plugin.sendMessage(p, "Not-In-Queue");
 				return false;
@@ -58,9 +58,7 @@ public class Commands implements CommandExecutor {
 
 		}
 
-		if (args[0].equalsIgnoreCase("list")) {
-
-			ChatColor color = ChatColor.GREEN;
+		if (args[0].equalsIgnoreCase("list") && args.length == 1) {
 
 			if (main.arenas.isEmpty()) {
 				plugin.sendMessage(p, "No-Arenas");
@@ -68,17 +66,59 @@ public class Commands implements CommandExecutor {
 			}
 
 			for (Arena arena : main.arenas.values()) {
+
+				ChatColor color = ChatColor.GREEN;
+
 				if (arena.getState() == ArenaState.WAITING)
 					color = ChatColor.DARK_GREEN;
 				if (arena.getState() == ArenaState.STARTING)
 					color = ChatColor.RED;
 				if (arena.getState() == ArenaState.RUNNING)
 					color = ChatColor.DARK_RED;
-				if (arena.getState() == ArenaState.EMPTY)
-					color = ChatColor.GREEN;
 
-				p.sendMessage(arena.getName() + ChatColor.DARK_GRAY + " (" + color + arena.getState().toString()
-						+ ChatColor.DARK_GRAY + ")");
+				p.sendMessage(arena.getName() + ChatColor.DARK_GRAY + " [" + ChatColor.YELLOW + "STATUS: " + color
+						+ arena.getState().toString() + ChatColor.DARK_GRAY + "]");
+			}
+			return true;
+		}
+
+		if (args[0].equalsIgnoreCase("queue") && args.length == 1) {
+
+			if (!p.hasPermission("s1v1.queue")) {
+				plugin.sendMessage(p, "No-Perms");
+				return false;
+			}
+
+			if (main.arenas.isEmpty()) {
+				plugin.sendMessage(p, "No-Arenas");
+				return false;
+			}
+
+			for (Arena arena : main.arenas.values()) {
+				ChatColor color = ChatColor.GREEN;
+
+				String player1 = "Empty";
+				String player2 = "Empty";
+
+				if (arena.getQueue().size() >= 1) {
+					player1 = arena.getQueue().get(0).getName();
+				}
+
+				if (arena.getQueue().size() == 2) {
+					player2 = arena.getQueue().get(1).getName();
+				}
+
+				if (arena.getState() == ArenaState.WAITING)
+					color = ChatColor.DARK_GREEN;
+				if (arena.getState() == ArenaState.STARTING)
+					color = ChatColor.RED;
+				if (arena.getState() == ArenaState.RUNNING)
+					color = ChatColor.DARK_RED;
+
+				p.sendMessage(arena.getName() + ChatColor.DARK_GRAY + " [" + ChatColor.YELLOW + "STATUS: " + color
+						+ arena.getState().toString() + ChatColor.DARK_GRAY + "] [" + ChatColor.RED + player1
+						+ ChatColor.WHITE + ", " + ChatColor.RED + player2 + ChatColor.DARK_GRAY + "]");
+				p.sendMessage(" ");
 			}
 			return true;
 		}
