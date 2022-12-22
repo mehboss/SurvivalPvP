@@ -146,8 +146,6 @@ public class Checks {
 					}
 				}
 
-				winner.sendMessage(ChatColor.RED + "Teleporting..");
-
 				for (String command : plugin.getConfig().getStringList("End-Commands")) {
 					Bukkit.dispatchCommand(Bukkit.getServer().getConsoleSender(),
 							command.replaceAll("%loser%", loser.getName()).replaceAll("%winner%", winner.getName()));
