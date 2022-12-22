@@ -87,9 +87,6 @@ public class Checks {
 		
 		for (Location loc : plugin.signloc) {
 
-			plugin.getLogger().log(Level.SEVERE, loc.toString());
-			plugin.getLogger().log(Level.SEVERE, String.valueOf(plugin.signloc.size()));
-
 			if (loc.getBlock() == null || loc.getBlock().getType() == null || !plugin.signMatch(loc.getBlock())) {
 				continue;
 			}
@@ -101,7 +98,6 @@ public class Checks {
 			}
 
 			if (!sign.getLine(1).isEmpty() && plugin.arenas.containsKey(sign.getLine(1))) {
-				plugin.getLogger().log(Level.SEVERE, loc.toString());
 				Arena arena = plugin.arenas.get(sign.getLine(1));
 				sign.setLine(3, "Status: " + arena.getState().toString());
 				sign.setLine(2, "Queue: " + String.valueOf(arena.getQueue().size()));
