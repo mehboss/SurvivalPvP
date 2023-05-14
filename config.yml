@@ -1,0 +1,50 @@
+# SurvivalPvP (1.0)
+# Made by Mehboss
+# Report any bugs via pm
+# Made to work with 1.19
+#
+#
+# Permissions: s1v1.admin / s1v1.leave / s1v1.queue
+# Hunger on/off
+Hunger: true
+#
+# Amount of seconds to pickup items
+Pickup-Seconds: 10
+#
+Game-Start: '&c[PvP] &fThe game has &a&lBEGUN.&f Your opponent is&c %opponent%. &fLast one alive wins!'
+Spawnpoint-1: '&c[PvP] &fSuccessfully set spawnpoint 1 for arena&c %arena%'
+Spawnpoint-2: '&c[PvP] &fSuccessfully set spawnpoint 2 for arena&c %arena%'
+Arena-Created: '&c[PvP] &fYou have successfully created the arena&c %arena%'
+Arena-Deleted: '&c[PvP] &fYou have successfully removed the arena&c %arena%'
+Arena-Found: '&c[PvP] &fFailed to create arena. An arena with this name exists already.'
+No-Arena: '&c[PvP] &fArena not found. Please double check spelling and make sure the arena exists &c(CaSeSeNsItIvE)'
+No-Arenas: '&c[PvP] &fYou must first create an arena using &c/s1v1 arena create [name]'
+Arena-Full: '&c[PvP] &fSpecified arena full. Searching elsewhere..'
+Already-In-Queue: '&c[PvP] &fYou are already in the queue for arena&c %arena%. &fType &e/s1v1 leave &fto cancel.'
+Joined-Full-Queue: '&c[PvP] &fThe queue is now full. The game will start in 5 seconds. &c(%arena%).'
+Added-To-Queue: '&c[PvP] &fYou have been added to the queue for&c %arena%. &fWaiting for one more player.'
+Not-In-Queue: '&c[PvP] &fYou are not currently in a queue.'
+Left-Queue: '&c[PvP] &fYou have successfully left the queue for arena&c %arena%.'
+#
+# Remove announced messages completely if not wanted
+Defeat-Player: '&c[PvP]&c %winner% &fhas defeated&c %loser% &fin arena&e %arena% &fduring a fight! &c&lTHEY WIN!'
+Defeat-Unknown: '&c[PvP] &c%loser% &fhas died from &cunknown causes.&c %winner% &c&lWINS.'
+#
+# Remove timed pickup and congrats msg completely if not wanted
+Winner-Congrats: '&c[PvP] &fYou have &a&lWON&f the game. Congratulations!'
+Timed-Pickup: '&c[PvP] &fYou have &cten seconds&f to pickup the loot before it disappears!'
+Player-Left: '&c[PvP] &fYour opponent left the queue. You have been put back in the queue.'
+Could-Not-Start: '&c[PvP] &fCould not start game. Both spawn locations have not been set for this arena &c(%arena%). &fPlease contact staff.'
+No-Available-Arenas: '&c[PvP] &fAll arenas are full. Please try again later or contact staff to create more arenas.'
+No-Perms: '&c[PvP] &fYou are lacking the permission &c[s1v1.queue/leave/admin]'
+#
+# Add multiple end commands
+End-Commands:
+  - 'spawn %winner%'
+Invalid-Args:
+  - '&cInvalid args! Use:'
+  - '&7/s1v1 arena create/delete [name]'
+  - '&7/s1v1 arena setspawn1/setspawn2 [name]'
+  - '&7/s1v1 leave'
+  - '&7/s1v1 list'
+  - '&7/s1v1 queue'
